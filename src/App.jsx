@@ -1,5 +1,5 @@
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import viteLogo from '/vite.svg' //public 아래
 import './App.css'
 import GroupText from './01/GroupText';
 
