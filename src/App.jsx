@@ -6,6 +6,8 @@ import MyClock from './02/MyClock'
 import MyListItem from './04/MyListItem'
 import MyList from './04/MyList'
 import Lotto from './05/Lotto'
+import FoodMain from './06/FoodMain'
+import FoodMain2 from './07/FoodMain'
 
 function App() {
   return(
@@ -21,7 +23,7 @@ function App() {
       <main className="w-full flex-grow
                         overflow-y-auto py-10
                         flex flex-col justify-start items-center">
-            <Lotto />
+            <FoodMain2 />
       </main>
       <footer className = "w-full min-h-20
                           bg-black text-white
