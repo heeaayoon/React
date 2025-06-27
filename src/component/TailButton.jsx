@@ -6,9 +6,9 @@ export default function TailButton({caption, color, onHandle}) {
   }
 
   const bghover = {
-    "blue" : "bg-blue-200",
-    "orange" : "bg-orange-200",
-    "lime" : "bg-lime-200"
+    "blue" : "hover:bg-blue-100 hover:text-black",
+    "orange" : "hover:bg-orange-100",
+    "lime" : "hover:bg-lime-100"
   }
 
   return (
