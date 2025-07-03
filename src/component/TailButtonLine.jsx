@@ -31,17 +31,20 @@
 export default function TailButtonLine({caption,color,onHandle}) {
     const bg = {
         "blue" : "bg-blue-400",
-        "orange" : "bg-orange-400"
+        "orange" : "bg-orange-400",
+        "lime" : "bg-lime-400"
     }
 
     const bghover = {
     "blue" : "hover:bg-blue-100 hover:text-black",
-    "orange" : "hover:bg-orange-100"
+    "orange" : "hover:bg-orange-100",
+    "lime" : "hover:bg-lime-100"
     }
 
     const bgborder = {
         "blue" : "border-blue-600",
-        "orange" : "border-orange-600"
+        "orange" : "border-orange-600",
+        "lime" : "border-lime-600"
     }
 
     return (
@@ -51,7 +54,8 @@ export default function TailButtonLine({caption,color,onHandle}) {
                           hover:cursor-pointer hover:font-bold
                         ${bghover[color]}  
                         ${bg[color]}
-                        ${bgborder[color]}`}>
+                        ${bgborder[color]}`}
+                        onClick= {onHandle}>
             {color} Toggle    
       </button>
     </div>
