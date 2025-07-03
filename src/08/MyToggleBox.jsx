@@ -12,7 +12,7 @@ export default function MyToggleBox({setcolor}) {
 
     const handleToggle = () =>{ 
         //console.log(setcolor)
-        setFlag(!Flag); //클릭시 플래그를 바꿈
+        setFlag(!Flag); //클릭시 플래그를 바꿈 -> 화면에서 변경될 부분 1. MyToggleBox의 배경색 / 2. MyToggleBox 내부 <div>의 글자색
     }
     
     return (

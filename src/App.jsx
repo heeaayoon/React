@@ -9,6 +9,7 @@ import Lotto from './05/Lotto'
 import FoodMain from './06/FoodMain'
 import FoodMain2 from './07/FoodMain'
 import MyToggle from './08/MyToggle'
+import MyEffect from './09/MyEffect'
 
 function App() {
   return(
@@ -23,7 +24,7 @@ function App() {
       <main className="w-full flex-grow
                         overflow-y-auto py-10
                         flex flex-col justify-start items-center">
-            <MyToggle />
+            <MyEffect />
       </main>
       <footer className = "w-full min-h-20
                           bg-black text-white
