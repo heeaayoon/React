@@ -7,7 +7,7 @@ export default function MyEffect() {
     //useEffect(함수, dependency Array): 콜백함수가 인수로 들어가서 무조건 실행됨 / dependency Array 에서 언제?를 결정
     //useEffect 는 필요할 때 사용하면 됨
     
-    //맨 처음 컴포넌트 생성시, 한번 콜백함수 실행함
+    //맨 처음 컴포넌트 생성시, 딱 한번 콜백함수 실행함
     useEffect(()=>{
         console.log('useEffect [] : ', cnt)
     },[]);
