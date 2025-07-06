@@ -11,6 +11,8 @@ import Lotto from './05/Lotto'
 import NewLotto from './05/NewLotto'
 import FoodMain from './06/FoodMain'
 import FoodMain2 from './07/FoodMain'
+import FoodMain3 from './06-1/FoodMain'
+import FoodMain4 from './07-1/FoodMain'
 import MyToggle from './08/MyToggle'
 import MyEffect from './09/MyEffect'
 import BoxOffice from './10/BoxOffice'
@@ -30,7 +32,7 @@ function App() {
       <main className="w-full flex-grow
                         overflow-y-auto py-10
                        flex flex-col border-amber-100 border-4"> 
-            <NewLotto />
+            <FoodMain4 />
       </main>
       <footer className = "w-full min-h-20
                           bg-black text-white
