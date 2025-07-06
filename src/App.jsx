@@ -3,9 +3,12 @@ import reactlogo from './assets/react.svg'
 import vitelogo from '/vite.svg'
 import GroupText from './01/GroupText'
 import MyClock from './02/MyClock'
+import MyDiv from './03/MyDiv'
 import MyListItem from './04/MyListItem'
 import MyList from './04/MyList'
+import Count from './04-1/Count'
 import Lotto from './05/Lotto'
+import NewLotto from './05/NewLotto'
 import FoodMain from './06/FoodMain'
 import FoodMain2 from './07/FoodMain'
 import MyToggle from './08/MyToggle'
@@ -27,7 +30,7 @@ function App() {
       <main className="w-full flex-grow
                         overflow-y-auto py-10
                        flex flex-col border-amber-100 border-4"> 
-            <Traffic/>
+            <NewLotto />
       </main>
       <footer className = "w-full min-h-20
                           bg-black text-white
