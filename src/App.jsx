@@ -33,7 +33,7 @@ function App() {
       <main className="w-full flex-grow
                         overflow-y-auto py-10
                        flex flex-col items-center"> 
-            <MyRef/>
+            <BoxOffice/>
       </main>
       <footer className = "w-full min-h-20
                           bg-black text-white

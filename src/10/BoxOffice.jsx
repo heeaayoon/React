@@ -1,15 +1,26 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export default function BoxOffice() {
-
+    
     const [tdata, setTdata] = useState([]);
     const [tag, setTag] = useState([]);
     const [info, setInfo] = useState('');
+    
+    const yRef = useRef();
+    
+    const yesterday =() =>{
+    let yd = new Date();
+    yd.setDate(yd.getDate()-1); //어제 날짜
+    return yd.toISOString().slice(0,10);
+    }
 
     const getFetchData = async () =>{
         const apikey = import.meta.env.VITE_MV_API;
         //console.log("apikey", apikey)
-        const dt = "20250702";
+        // const yRefValue = yRef.current.value;
+        // console.log(yRefValue); //2025-07-07 방식으로 가져옴
+        const dt = yRef.current.value.replaceAll("-",''); //-를 제거해서 변수 dt에 전달
+        console.log(dt)
         let url = `https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${apikey}&targetDt=${dt}`;
     
         //fetch -> 현재는 async~await 구문 사용
@@ -32,7 +43,8 @@ export default function BoxOffice() {
     
     //일단은 컴포넌트가 처음 생성될 때, 패치된 데이터를 가져오기
     useEffect(()=>{
-        getFetchData();
+        yRef.current.value = yesterday(); //디폴트는 어제 날짜의 데이터임
+        getFetchData(); //어제 날짜를 이용해 패치함
     },[])
 
     //tDdata가 변경되면, 패치된 데이터를 가져오기 
@@ -71,6 +83,14 @@ export default function BoxOffice() {
 
   return (
     <div>
+        <div className="flex justify-end mb-5">
+            <input  type = "date" 
+                    placeholder="날짜 선택"
+                    max = {yesterday()} //어제 날짜까지만 선택가능
+                    ref={yRef} 
+                    onChange={getFetchData} //onChange : 사용자가 날짜를 변경할 때마다 발생되는 이벤트
+                    className="flex mx-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"/>
+        </div>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
