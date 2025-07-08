@@ -11,10 +11,9 @@ export default function Lotto() {
 
     //중복되지 않은 7개의 숫자 생성(1~45)
     while(arr.length<7){
-    let n = Math.floor(Math.random()*45)+1;
-    
-    //중복숫자가 없으면 배열에 집어넣기
-    if(!arr.includes(n)) arr.push(n);
+      let n = Math.floor(Math.random()*45)+1;
+      //중복숫자가 없으면 배열에 집어넣기
+      if(!arr.includes(n)) arr.push(n);
     }
 
     //보너스 숫자(맨 마지막 숫자)는 하나 빼기

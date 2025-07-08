@@ -15,8 +15,7 @@ export default function FoodMain2() {
     const handleClick = (gubun) => {
       //console.log(gubun)
       let choose = fooddata.filter((item) => item["운영주체 분류"].replaceAll(' ',"") == gubun)
-
-       choose = choose.map(item =>
+      choose = choose.map(item =>
                 <FoodCard   key = {item.사업장명}
                             item = {item}/>
             )
