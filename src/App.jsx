@@ -17,6 +17,7 @@ import MyToggle from './08/MyToggle'
 import MyEffect from './09/MyEffect'
 import BoxOffice from './10/BoxOffice'
 import Traffic from './11/Traffic'
+import MyRef from './12/MyRef'
 
 
 function App() {
@@ -31,13 +32,8 @@ function App() {
       </header>
       <main className="w-full flex-grow
                         overflow-y-auto py-10
-<<<<<<< HEAD
-                       flex flex-col"> 
-            <Traffic/>
-=======
-                       flex flex-col border-amber-100 border-4"> 
-            <FoodMain4 />
->>>>>>> 522ed20b7fd60286b730d4029f189ab0cbdc2cc1
+                       flex flex-col items-center"> 
+            <MyRef/>
       </main>
       <footer className = "w-full min-h-20
                           bg-black text-white
