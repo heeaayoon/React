@@ -4,66 +4,118 @@ import TrafficNav from "./TrafficNav";
 export default function Traffic() {
     //패치 데이터를 저장할 state 변수
     const [tdata, setTdata] = useState([]);
-    //대분류
-    const [c1, setC1] = useState([]);
 
-    //선택된 대분류가 뭔지?
-    const [selC1, setSelC1] = useState();
+    //대분류 데이터 저장할 state 변수-> 배열
+    const [c1,setC1] = useState([]);
 
-    //사고유형
-    const [c2, setC2] = useState();
+    //선택된 대분류 저장할 state 변수-> 값 1개
+    const [sel1, setSel1] = useState();
 
-    //선택된 사고유형이 뭔지?
-    const [selC12, setSelC2] = useState();
+    //사고유형 데이터 저장할 state 변수-> 배열
+    const [c2, setC2] = useState([]);
 
-    //Fetch함수 생성
-    const getFetchData = async()=>{
+    //선택된 사고유형 저장할 state 변수-> 값 1개
+    const [sel2, setSel2] = useState();
+
+    //최종적으로 선택된 자료
+    const [info, setInfo] = useState();
+    const [infoTag, setInfoTag] = useState();
+
+
+    
+    //데이터 패치 함수(비동기함수:일을 수행하면서 다른 일을 할수 있음 -> 이를 막기 위해 await 키워드 사용)
+    const getFetchData=async()=>{
         const baseUrl = 'https://api.odcloud.kr/api/15070282/v1/uddi:8449c5d7-8be5-4712-9093-968fc0b2d9fc?';
         const url = `${baseUrl}page=1&perPage=18&serviceKey=${import.meta.env.VITE_DATA_API}`;
-
         //console.log(url) //url이 제대로 만들어졌는지 확인작업 필요
 
-        const resp = await fetch(url);
-        const data = await resp.json();
-        setTdata(data.data); //총 데이터
-        console.log(data.data);
+        const resp = await fetch(url); //패치되어 resp 변수로 들어갈 때까지 대기
+        const data = await resp.json(); //json화되어서 data변수로 들어갈 때까지 대기
+        //console.log(data) //url 내부 데이터 전부
+        setTdata(data.data); //필요한 데이터만 tdata에 업데이트
+        //console.log(data.data);
     }
 
-    //컴포넌트가 생성되면 fetch 한번 실행됨
+    //컴포넌트 생성이 될 때, 처음 한 번 실행(데이터패치 시키기) by useEffect 훅
     useEffect(()=>{
-        getFetchData();
+        //데이터 패치 함수를 호출
+        getFetchData()
+
     },[])
 
-    //전체 데이터가 패치 되었을 때, 대분류 생성
+    //tdate가 변경이 되었을 때
     useEffect(()=>{
-        if(tdata.length == 0) return;  // 대분류 뽑아내기 전에는 그냥 넘김
-        let tm = tdata.map(item => item['사고유형대분류'])
-        tm = [...new Set(tm)] //대분류 중복 제거
-        setC1(tm)
-        console.log(tm)
-    },[tdata]);
+        //맨 처음 useState에 의해 초기화 -> 껍데기만 있음
+        if(tdata.length==0) return;
 
-    //대분류가 선택되었을 때
+        //console.log("tdata",tdata)
+        //패치되어 tdata가 변경되었을 때 -> 18개 값이 들어있는 경우
+        //대분류 생성
+        let tm = tdata.map(item=>item['사고유형대분류']); //18개의 대분류(중복있음) 배열
+        tm = [...new Set(tm)] //집합(set)으로 중복제거 -> 전개연산자를 이용해 배열로 다시 변환
+        setC1(tm) //c1 stste 변수에 대분류 업데이트 -> 대분류 생성 완료
+    },[tdata])
+
+    // useEffect(()=>{
+    //     console.log("c1",c1)
+    // },[c1])
+
+    //대분류 중에서 특정 항목이 선택되었을 때(변경 가능)  
     useEffect(()=>{
-        if(!tdata || !c1 || !selC1) return; // 대분류가 선택되지 않았을 때 그냥 넘김
-        console.log("선택대분류 : ", selC1)
+        //대분류가 초기화되어 선택항목이 없을 때
+        if(!sel1) return;
 
-        let tm = tdata.filter(item => item['사고유형대분류']==selC1);
+        //대분류 선택되었을 때 -> 사고유형 생성
+        let tm = tdata.filter(item => item['사고유형대분류']==sel1)
+                      .map(item=>item['사고유형']); //사고유형만 골라내기
+        // console.log("c2의 tm", tm)
         setC2(tm);
-    },[selC1])
+        setInfoTag(" "); //대분류 재선택시, 기존 자료의 내용 초기화
+    },[sel1])
 
-    //사고유형 생성
+    //사고유형 중에서 특정 항목이 선택되었을 때(변경 가능)  
     useEffect(()=>{
-        console.log("c2",c2)
-    },[c2])
+        //사고유형 선택항목이 없을 때
+        if(!sel1||!sel2||!c2) return;
 
+        //사고유형 선택되었을 때 -> 데이터 항목 생성
+        let tm = tdata.filter(item => item['사고유형대분류']==sel1&&item['사고유형']==sel2);
+        setInfo(tm[0]);
+        //setInfoTag(" ");
+    },[sel2])
+
+    //사고 유형이 선택되었을 때 
+    useEffect(()=>{
+        if(!info) return;
+
+        console.log("info",info);
+        let tm = ["사고건수","사망자수","중상자수","경상자수","부상신고자수"];
+        tm = tm.map(item=> <div key={item} className="flex text-lg h-10 p-2 ">
+                                <div className="bg-indigo-100 mr-1.5">
+                                    {item}
+                                </div>
+                                <div>
+                                    {parseInt(info[item]).toLocaleString()}
+                                </div>
+                            </div>)
+        setInfoTag(tm)
+    },[info])
+        
     return (
-    <div className="w-9/10">
-      { c1 && <TrafficNav 
-                        title = '대분류' 
-                        c = {c1}
-                        selC = {selC1} 
-                        setSelC = {setSelC1}/>}
+    <div>
+        {c1&& <TrafficNav title = "대분류" 
+                    c = {c1}
+                    sel = {sel1}
+                    setSel={setSel1}
+                    />}
+        {c2&&sel1&&<TrafficNav title = "사고유형"
+                    c = {c2}
+                    sel = {sel2}
+                    setSel={setSel2}
+                    />}
+        <div className="w-full flex justify-between items-center">
+            {infoTag}
+        </div>
     </div>
   )
 }

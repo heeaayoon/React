@@ -26,7 +26,7 @@ function App() {
       </header>
       <main className="w-full flex-grow
                         overflow-y-auto py-10
-                       flex flex-col border-amber-100 border-4"> 
+                       flex flex-col"> 
             <Traffic/>
       </main>
       <footer className = "w-full min-h-20
