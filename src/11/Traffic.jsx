@@ -27,7 +27,7 @@ export default function Traffic() {
     const getFetchData=async()=>{
         const baseUrl = 'https://api.odcloud.kr/api/15070282/v1/uddi:8449c5d7-8be5-4712-9093-968fc0b2d9fc?';
         const url = `${baseUrl}page=1&perPage=18&serviceKey=${import.meta.env.VITE_DATA_API}`;
-        //console.log(url) //url이 제대로 만들어졌는지 확인작업 필요
+        console.log(url) //url이 제대로 만들어졌는지 확인작업 필요
 
         const resp = await fetch(url); //패치되어 resp 변수로 들어갈 때까지 대기
         const data = await resp.json(); //json화되어서 data변수로 들어갈 때까지 대기
@@ -42,6 +42,19 @@ export default function Traffic() {
         getFetchData()
 
     },[])
+
+    //선택되었을 때 -> tdata 가 채워졌을 때?
+    useEffect(()=>{
+        if(tdata.length==0) return; //tdata가 없으면 뿌리지 말기
+        let tm = tdata.map(item => <TailCard
+                                             key = {item.galContentId}
+                                             imgUrl = {item.galWebImageUrl}
+                                             title = {item.galTitle} 
+                                             addre ={item.galPhotographyLocation} 
+                                             searchKeyword = {item.galSearchKeyword}
+                                             />)
+        setTag(tm);
+    },[tdata])    
 
     //tdate가 변경이 되었을 때
     useEffect(()=>{
