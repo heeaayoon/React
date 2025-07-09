@@ -5,8 +5,7 @@ export default function TailSearch({TailRef, onSearch, onReset}) {
     //const keyRef = useRef(); //여기서 쓰지 말고 부모에서 사용하기
 
   return (
-    <form className="w-8/10 lg:w-6/10 mt-10
-                    grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <form className="w-8/10 lg:w-6/10 mt-10 flex justify-between items-center">
             <input  type = "text" 
                     id = "Tail" 
                     ref={TailRef}
