@@ -1,6 +1,7 @@
 import TailButton from '../component/TailButton'
 import getxy from "./getxy.json" 
 import { useEffect, useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function Fcst() {
  
@@ -8,6 +9,8 @@ export default function Fcst() {
     const areaRef = useRef();
     const area = getxy.map(item =>item['1단계']);
     console.log(area)
+
+    const navigate = useNavigate(); 
 
     useEffect(()=>{
         //오늘날짜
@@ -23,6 +26,10 @@ export default function Fcst() {
         console.log(tm)
         console.log(x,y)
         console.log(gubun,dtRef.current.value, areaRef.current.value)
+        //navigate('/fcstList'); //fcstList 페이지로 넘기기
+
+        let url = `/fcstList?gubun=${gubun}&dt=${dtRef.current.value}`
+        navigate(`${url}&area=${areaRef.current.value}&x=${x}&y=${y}`);
     }
 
   return (
