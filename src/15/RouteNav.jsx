@@ -9,7 +9,7 @@ export default function RouteNav() {
             Home
         </div>
         </Link>
-        <Link to = "/p1">
+        <Link to = "/p1/m/m">
         <div className='p-4 m-2 border border-indigo-700 rounded bg-indigo-200 font-bold
                         hover:bg-indigo-50'>
             Page1
