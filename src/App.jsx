@@ -20,6 +20,8 @@ import Traffic from './11/Traffic'
 import MyRef from './12/MyRef'
 import Gallery from './13/Gallery'
 import Festival from './14/Festival'
+import Fcst from './16/Fcst'
+import RouteMain from './15/RouteMain'
 
 
 function App() {
@@ -35,7 +37,7 @@ function App() {
       <main className="w-full flex-grow
                         overflow-y-auto py-10
                        flex flex-col items-center"> 
-            <Festival/>
+            <RouteMain/>
       </main>
       <footer className = "w-full min-h-20
                           bg-black text-white
