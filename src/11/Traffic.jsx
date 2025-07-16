@@ -54,7 +54,7 @@ export default function Traffic() {
                                              addre ={item.galPhotographyLocation} 
                                              searchKeyword = {item.galSearchKeyword}
                                              />)
-        setTag(tm);
+        setC1(tm);
     },[tdata])    
 
     //tdate가 변경이 되었을 때
