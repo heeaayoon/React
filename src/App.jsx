@@ -22,7 +22,7 @@ import Gallery from './13/Gallery'
 import Festival from './14/Festival'
 import Fcst from './16/Fcst'
 import FcstList from './16/FcstList'
-import DivMain from './17/DivMain'
+import DivMain from './18/DivMain' //전역상태변수
 //import RouteMain from './15/RouteMain' //라우터 내부에 라우터 걸 수 없음
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppNav from './AppNav'
