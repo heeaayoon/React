@@ -3,7 +3,7 @@ import reactlogo from './assets/react.svg'
 import vitelogo from '/vite.svg'
 import GroupText from './01/GroupText'
 import MyClock from './02/MyClock'
-import MyDiv from './03/MyDiv'
+//import MyDiv from './03/MyDiv'
 import MyListItem from './04/MyListItem'
 import MyList from './04/MyList'
 import Count from './04-1/Count'
@@ -22,6 +22,7 @@ import Gallery from './13/Gallery'
 import Festival from './14/Festival'
 import Fcst from './16/Fcst'
 import FcstList from './16/FcstList'
+import DivMain from './17/DivMain'
 //import RouteMain from './15/RouteMain' //라우터 내부에 라우터 걸 수 없음
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppNav from './AppNav'
@@ -51,6 +52,7 @@ function App() {
               <Route path="/fest" element = {<Festival/>} />
               <Route path="/fcst" element = {<Fcst/>} />
               <Route path="/fcstList" element = {<FcstList/>} />
+              <Route path="/div" element = {<DivMain/>} />
             </Routes>
       </main>
       <footer className = "w-full min-h-20 bg-black text-white flex justify-center items-center">

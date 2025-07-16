@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import TrafficNav from "./TrafficNav";
+import TailCard from "../component/TailCard";
 
 export default function Traffic() {
     //패치 데이터를 저장할 state 변수
