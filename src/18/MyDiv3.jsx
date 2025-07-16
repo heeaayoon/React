@@ -2,7 +2,7 @@ import { TbMathGreater } from "react-icons/tb";
 //import { useState } from "react";
 import TailButton from "../component/TailButton";
 import { useAtom } from "jotai";
-import {cntAtom, cntAtom2} from "./CntAtom"; //CntAtom.jsx에서 선언한 전역변수 import해서 사용
+import {cntAtom} from "./CntAtom"; //CntAtom.jsx에서 선언한 전역변수 import해서 사용
 
 export default function MyDiv3() {
     const m3 = "myDiv3"

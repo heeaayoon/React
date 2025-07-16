@@ -14,9 +14,7 @@ export default function DivMain() {
                     p-5 text-2xl
                     flex flex-col items-center">
         <div className="w-9/10 flex justify-start mb-2">
-        {m}
-        </div>
-        <div className="w-9/10 flex justify-start mb-2">
+        {m}<br/>
         n = {n} , n2 = {n2}
         </div>
         <MyDiv/>
