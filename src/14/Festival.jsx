@@ -19,14 +19,14 @@ export default function Festival() {
         const data = await resp.json(); 
         //console.log(data) //url 내부 데이터 전부
         setTdata(data.getFestivalKr.item); //필요한 데이터만 tdata에 업데이트
-        console.log(data.getFestivalKr.item);
+        //console.log(data.getFestivalKr.item);
     }   
     
     //option이 선택되면(selRef값에 따라) -> option에 해당하는 card 생성
     const handleShow = () =>{
         console.log(selRef.current.value)
         let tm = tdata.filter(item => item['GUGUN_NM']==selRef.current.value) //selRef값과 동일한 구의 데이터만 filter
-        //console.log(tm)
+        console.log(tm)
         tm = tm.map(item => <TailCard key = {item.UC_SEQ}
                                       imgUrl = {item.MAIN_IMG_NORMAL}
                                       title = {item.MAIN_TITLE.split('(')[0]} 

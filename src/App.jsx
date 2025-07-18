@@ -23,6 +23,7 @@ import Festival from './14/Festival'
 import Fcst from './16/Fcst'
 import FcstList from './16/FcstList'
 import DivMain from './18/DivMain' //전역상태변수
+import ChargeMain from './19/ChargeMain'
 //import RouteMain from './15/RouteMain' //라우터 내부에 라우터 걸 수 없음
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppNav from './AppNav'
@@ -53,6 +54,7 @@ function App() {
               <Route path="/fcst" element = {<Fcst/>} />
               <Route path="/fcstList" element = {<FcstList/>} />
               <Route path="/div" element = {<DivMain/>} />
+              <Route path="/charge" element = {<ChargeMain/>} />
             </Routes>
       </main>
       <footer className = "w-full min-h-20 bg-black text-white flex justify-center items-center">

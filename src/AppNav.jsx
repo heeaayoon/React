@@ -57,6 +57,12 @@ export default function AppNav() {
             Div
         </div>
         </Link>
+        <Link to='/charge'>
+        <div className='p-4 m-2  bg-indigo-200 rounded-2xl font-bold h-10 flex justify-center items-center
+                        hover:bg-indigo-50'>
+            Charge
+        </div>
+        </Link>
     </div>
   )
 }
