@@ -35,7 +35,7 @@ export default function ChargeMain() {
         //console.log(kindRef.current.value) //선택한 충전소 구분의 번호
 
         //지역이 선택되지 않고 충전소 구분 선택을 선택하는 경우 -> 경고창 생성
-        if(zRef.current.value =="지역 선택"){ 
+        if(zRef.current.value ==""){ 
             alert("지역을 선택하세요");
             zRef.current.focus();
             kindRef.current.value = "" ;
@@ -45,10 +45,14 @@ export default function ChargeMain() {
 
     //패치 데이터를 저장할 state 변수
     const [tdata, setTdata] = useState([]); //전체 데이터
-    const [totalCount, setTotalCount] = useState([]); //옵션선택하면 그에 맞는 데이터만 선택
+    let totalCount = 0; //옵션선택하면 그에 맞는 데이터만 선택
 
     //페이지당 데이터 갯수 설정
     const perPage = 12 ;
+
+    //페이지 네이션을 위한 변수
+    const [currentPage,setCurrentPage] = useState(1)
+    const [totalPage,setTotalPage] = useState(1)
 
     //데이터 패치 함수
     const getFetchData=async(cpage)=>{
@@ -92,16 +96,20 @@ export default function ChargeMain() {
         const resp = await fetch(url); 
         const data = await resp.json(); 
         //console.log(data) //url 내부 데이터 전부
+        console.log(totalCount);
+        totalCount=data.totalCount; //필요한 데이터만 totalCount에 업데이트
+        setTotalPage(Math.ceil(totalCount/perPage)); //전체 게시물수/페이지당 게시물 수 = 총 페이지 수
+        console.log(totalPage);
+        setCurrentPage(cpage);
         setTdata(data.items.item); //필요한 데이터만 tdata에 업데이트
-        setTotalCount(data.totalCount); //필요한 데이터만 totalCount에 업데이트
         //console.log(data.items.item);
     }   
 
-    useEffect(()=>{
-        if(tdata.length==0 && totalCount == 0) return; //tdata가 없으면 뿌리지 말기
-        console.log("tdata : " , tdata)
-        console.log("totalCount : " , totalCount)
-    },[tdata, totalCount])
+    // useEffect(()=>{
+    //     if(tdata.length==0 && totalCount == 0) return; //tdata가 없으면 뿌리지 말기
+    //     console.log("tdata : " , tdata)
+    //     console.log("totalCount : " , totalCount)   
+    // },[tdata, totalCount])
 
   return (
     <div className="w-full flex flex-col">
@@ -138,9 +146,9 @@ export default function ChargeMain() {
             }
         </div>
         <div>
-            <TailPageNation currentPage = {}
-                            totalPage = {}
-                            onPageChange = {} />
+            <TailPageNation currentPage = {currentPage}
+                            totalPage = {totalPage}
+                            onPageChange = {getFetchData} />
         </div>
     </div>
   )
