@@ -1,10 +1,12 @@
 import TailButton from "../component/TailButton"
 import TailSelect from "../component/TailSelect"
 import TailPageNation from "../component/TailPageNation";
+import TailCard2 from "../component/TailCard2";
 import { useEffect, useState, useRef } from "react";
 import zcode from "./zcode.json" //지역 선택
 import zscode from "./zscode.json" //지역동 선택
 import kind from "./kind.json" //충전소 구분
+import stat from "./stat.json" //충전 상태
 
 export default function ChargeMain() {
     //console.log(Object.keys(zcode))
@@ -41,7 +43,6 @@ export default function ChargeMain() {
         }
     }
 
-
     //패치 데이터를 저장할 state 변수
     const [tdata, setTdata] = useState([]); //전체 데이터
     const [totalCount, setTotalCount] = useState([]); //옵션선택하면 그에 맞는 데이터만 선택
@@ -50,7 +51,7 @@ export default function ChargeMain() {
     const perPage = 12 ;
 
     //데이터 패치 함수
-    const getFetchData=async()=>{
+    const getFetchData=async(cpage)=>{
 
         //지역이 선택되지 않고 충전소 구분 선택을 선택하는 경우 -> 경고창 생성
         if(zRef.current.value =="지역 선택"){ 
@@ -86,7 +87,7 @@ export default function ChargeMain() {
             url = `${url}&kind=${kindRef.current.value}`
         }
 
-        //console.log(url) //선택 여부에 따라 url이 제대로 만들어졌는지 재확인
+        console.log(url) //선택 여부에 따라 url이 제대로 만들어졌는지 재확인
 
         const resp = await fetch(url); 
         const data = await resp.json(); 
@@ -98,8 +99,8 @@ export default function ChargeMain() {
 
     useEffect(()=>{
         if(tdata.length==0 && totalCount == 0) return; //tdata가 없으면 뿌리지 말기
-        console.log("tdata : " + tdata)
-        console.log("totalCount : " + totalCount)
+        console.log("tdata : " , tdata)
+        console.log("totalCount : " , totalCount)
     },[tdata, totalCount])
 
   return (
@@ -124,6 +125,22 @@ export default function ChargeMain() {
             <TailButton caption = "검색"
                         color = "blue"
                         onHandle = {()=>getFetchData(1)} />
+        </div>
+        <div className="w-full grid grid-1 lg:grid-cols-3 gap-2 mt-5"> 
+            {
+                tdata.map(item => <TailCard2 key={item.statId}
+                                            title={item.statNm}
+                                            sub={`${item.addr}, ${item.busiCall}`}
+                                            searchKeyword={`${item.useTime},${stat[item.stat]== undefined ?"":stat[item.stat]}
+                                                                ,${item.parkingFree =='Y'?'무료주차':'유료주차'}
+                                                                ,충전방식 ${item.method}
+                                                                ,충전용량 ${item.output}KW`}/>)
+            }
+        </div>
+        <div>
+            <TailPageNation currentPage = {}
+                            totalPage = {}
+                            onPageChange = {} />
         </div>
     </div>
   )
